@@ -8,11 +8,17 @@ main = function() {
 		if($('#chooseConcentration').hasClass('currentDiv')) {
 			concentration = $('#concentrationDropdown option:selected').text();
 			console.log(concentration);
-			$('#chooseConcentration').removeClass('currentDiv');
-			$('#chooseConcentration').addClass('hidden');
-			$('#chooseClasses').removeClass('hidden');
-			$('#chooseClasses').addClass('currentDiv');
-			$('#backButton').removeClass('hidden');
+			removeCurrentDiv('#chooseConcentration');
+			makeCurrentDiv('#chooseClasses');
+			$('#backButton').show();
+		}
+	});
+
+	$('#backButton').click(function() {
+		if($('#chooseClasses').hasClass('currentDiv')) {
+			removeCurrentDiv('#chooseClasses');
+			makeCurrentDiv('#chooseConcentration');
+			$('#backButton').hide();
 		}
 	});
 
@@ -23,6 +29,19 @@ main = function() {
 setupInitialVisibility = function() {
 	$('#chooseConcentration').addClass('currentDiv');
 	$('#chooseClasses').addClass('hidden');
+	$('#backButton').hide();
 }
+
+makeCurrentDiv = function(selector) {
+	$(selector).addClass('currentDiv');
+	$(selector).removeClass('hidden');
+}
+
+removeCurrentDiv = function(selector) {
+	$(selector).removeClass('currentDiv');
+	$(selector).addClass('hidden');
+}
+
+
 
 $(document).ready(main);
