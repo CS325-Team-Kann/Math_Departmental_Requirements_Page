@@ -22,7 +22,8 @@
   <link rel="stylesheet" href="http://www.math.umass.edu/sites/www.math.umass.edu/files/css/css_PmCpWpbTK3G96OHKH6j_YpC2y3gNUgkj_zBg1bgnhpg.css" media="all" />
   <link rel="stylesheet" type="text/css" href="../css/styles.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Merriweather:regular|Source+Sans+Pro:600,700,italic,regular&amp;subset=latin,latin-ext" media="all" />
-  <script type="text/javascript" href="../js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="../js/app.js"></script>
 </head>
 <body class="html not-front not-logged-in one-sidebar sidebar-second page-node page-node- page-node-13 node-type-book section-undergraduate" >
   <p id="skip-link">
@@ -85,10 +86,9 @@
         <div class="field-body">
           <p>The requirements for a mathematics degree provide the student with maximum flexibility in designing an overall course of study to meet his or her scientific, educational and career goals. The beginning courses emphasize computational skills, problem solving, and the understanding of basic concepts. As students progress, they must solve problems that are less and less routine and more abstract or intricate. Some upper-level courses emphasize proofs and the understanding of abstract structures, while others emphasize advanced computational methods or the formulation and analysis of mathematical or statistical models of reality. A number of the courses involve the use of computers in a fundamental manner in the development of the material covered.</p>
           <br>
-          <div>
-            <p><b>Choose a concentration:</b></p>
+          <div id="chooseConcentration">
+            <p>Choose a concentration:</p>
             <center>
-              <br>
               <select>
                 <option>Undecided</option>
                 <option>Actuarial</option>
@@ -98,14 +98,16 @@
                 <option>Statistics</option>
                 <option>Teaching</option>
                 <option>Design Your Own</option>
-
               </select>
-              <br><br>
-              <button type="button">Next</button>
             </center>
           </div>
+          <div id="chooseClasses" style="display:none">
+            <p></p>
+          </div>
+
+          <button id="backButton" type="button" style="display:none">Back</button>
+          <button id="nextButton" type="button">Next</button>
       </div>
-      <br><br><br>
 
       </div>
     </div>
