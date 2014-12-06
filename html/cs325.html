@@ -36,7 +36,7 @@
     <div style="background-color: #881c1c; 
     text-align: right; min-height: 24px; padding: 10px 15px 6px 15px;" id="topbanner">
     <a href="http://umass.edu/"><img width="146" height="22" style="float: left; width: 146px; border: 0;" alt="UMass Amherst" src="http://umass.edu/umhome/identity/top_banner_06/mar-wordmark.gif" id="banner_wordmark"></a><form style="margin: -4px 0 0 0; padding: 0" onsubmit="if (this.q.value=='Search UMass Amherst') return false;" name="gs" method="get" action="http://googlebox.oit.umass.edu/search"><div><label for="q" style="display:inline-block;"><input type="text" onblur="if (this.value=='') this.value='Search UMass Amherst'" onfocus="if (this.value=='Search UMass Amherst') this.value=''" value="Search UMass Amherst" id="q" name="q" size="22" style="display:inline-block;font-size: 11px; font-family: Verdana, sans-serif; padding-left: 2px;margin:0 5px 0 0;"></label><input type="submit" style="display:inline-block;font-size: 11px; height: 18px;margin-top:0; font-family: Verdana, sans-serif;" value="Go" name="sa"><input type="hidden" value="default_collection" name="site"><input type="hidden" value="default_frontend" name="client"><input type="hidden" value="default_frontend" name="proxystylesheet"><input type="hidden" value="xml_no_dtd" name="output"></div></form>
-    </div>
+  </div>
 
   <!-- End UMass Amherst top banner -->
 
@@ -77,41 +77,47 @@
 
 
 
-        <header>
-          <span property="dc:title" content="Departmental Graduation Requirements" class="rdf-meta element-hidden"></span>
+      <header>
+        <span property="dc:title" content="Departmental Graduation Requirements" class="rdf-meta element-hidden"></span>
 
-        </header>
+      </header>
 
 
-        <div class="field-body">
-          <p>The requirements for a mathematics degree provide the student with maximum flexibility in designing an overall course of study to meet his or her scientific, educational and career goals. The beginning courses emphasize computational skills, problem solving, and the understanding of basic concepts. As students progress, they must solve problems that are less and less routine and more abstract or intricate. Some upper-level courses emphasize proofs and the understanding of abstract structures, while others emphasize advanced computational methods or the formulation and analysis of mathematical or statistical models of reality. A number of the courses involve the use of computers in a fundamental manner in the development of the material covered.</p>
-          <br>
-          <div id="chooseConcentration">
-            <p>Choose a concentration:</p>
-            <center>
-              <select>
-                <option>Undecided</option>
-                <option>Actuarial</option>
-                <option>Applied Mathematics</option>
-                <option>Mathematical Computing</option>
-                <option>Pure Mathematics</option>
-                <option>Statistics</option>
-                <option>Teaching</option>
-                <option>Design Your Own</option>
-              </select>
-            </center>
+      <div class="field-body">
+        <p>The requirements for a mathematics degree provide the student with maximum flexibility in designing an overall course of study to meet his or her scientific, educational and career goals. The beginning courses emphasize computational skills, problem solving, and the understanding of basic concepts. As students progress, they must solve problems that are less and less routine and more abstract or intricate. Some upper-level courses emphasize proofs and the understanding of abstract structures, while others emphasize advanced computational methods or the formulation and analysis of mathematical or statistical models of reality. A number of the courses involve the use of computers in a fundamental manner in the development of the material covered.</p>
+        <br>
+        <div id="chooseConcentration" class="center">
+          <p>Choose a concentration:</p>
+            <select id="concentrationDropdown">
+              <option>Undecided</option>
+              <option>Actuarial</option>
+              <option>Applied Mathematics</option>
+              <option>Mathematical Computing</option>
+              <option>Pure Mathematics</option>
+              <option>Statistics</option>
+              <option>Teaching</option>
+              <option>Design Your Own</option>
+            </select>
+        </div>
+        <div id="chooseClasses" class="center">
+          <p>Please select the courses you have already taken or already have credits for:</p>
+          <div class="classList center">
+            <input type="checkbox" /> MATH 131 <br />
+            <input type="checkbox" /> MATH 132 <br />
+            <input type="checkbox" /> MATH 233 <br />
+            <input type="checkbox" /> MATH 235 <br />
+            <input type="checkbox" /> MATH 300 <br />
           </div>
-          <div id="chooseClasses" style="display:none">
-            <p></p>
-          </div>
-
+        </div>
+        <div id="buttonsSection" style="text-align:center">
           <button id="backButton" type="button" style="display:none">Back</button>
           <button id="nextButton" type="button">Next</button>
+        </div>
       </div>
 
-      </div>
     </div>
   </div>
+</div>
 
 </body>
 </html>
