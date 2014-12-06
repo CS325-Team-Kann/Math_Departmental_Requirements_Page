@@ -12,6 +12,7 @@ main = function() {
 			$('#chooseConcentration').addClass('hidden');
 			$('#chooseClasses').removeClass('hidden');
 			$('#chooseClasses').addClass('currentDiv');
+			$('#backButton').removeClass('hidden');
 		}
 	});
 
