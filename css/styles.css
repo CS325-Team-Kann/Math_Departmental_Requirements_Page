@@ -1,9 +1,5 @@
-button {
-	margin: 5px;
-}
-
-p {
-	text-align:center;
+.btn {
+	margin: 10px;
 }
 
 .center {
@@ -20,7 +16,7 @@ p {
 }
 
 #concentrationDropdown {
-	margin-left: 25%;
+	/*margin-left: 25%;
 	/* this is here because applying
 	the .center styling would not work
 	*/
