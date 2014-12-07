@@ -13,12 +13,9 @@ main = function() {
 			$('#backButton').show();
 		}
 		else if ($('#chooseClasses').hasClass('currentDiv')) {
-			if (concentration === "Undecided") {
-				removeCurrentDiv('#chooseClasses');
-				makeCurrentDiv('#undecidedResultPage');
-				$('#nextButton').hide();
-				$('#savePDFButton').show();
-			}
+			removeCurrentDiv('#chooseClasses');
+			showConcentration(concentration)
+			$('#savePDFButton').show();
 			var courseList = $('ul.courses');
 			courseList.empty();
 			$.each(coursesTaken, function(i) {
@@ -69,6 +66,13 @@ setupInitialVisibility = function() {
 	$('#chooseConcentration').addClass('currentDiv');
 	$('#chooseClasses').addClass('hidden');
 	$('#undecidedResultPage').addClass('hidden');
+	$('#actuarial').addClass('hidden');
+	$('#individual').addClass('hidden')
+	$('#computing').addClass('hidden')
+	$('#pure').addClass('hidden')
+	$('#teaching').addClass('hidden')
+	$('#stats').addClass('hidden')
+	$('#applied').addClass('hidden')
 	$('#coursesTaken').addClass('hidden');
 	$('#backButton').hide();
 	$('#savePDFButton').hide();
@@ -84,6 +88,49 @@ removeCurrentDiv = function(selector) {
 	$(selector).addClass('hidden');
 }
 
-
+showConcentration = function(concentration){
+  switch (concentration){
+  case "Undecided":
+  	$('#actuarial').removeClass('hidden')
+		$('#individual').removeClass('hidden')
+		$('#computing').removeClass('hidden')
+		$('#pure').removeClass('hidden')
+		$('#teaching').removeClass('hidden')
+		$('#stats').removeClass('hidden')
+		$('#applied').removeClass('hidden')
+  	$('#nextButton').hide()
+    break
+  case "Actuarial":
+  	$('#actuarial').removeClass('hidden')
+  	$('#nextButton').hide()
+    break
+  case "Applied Mathematics":
+  	$('#applied').removeClass('hidden')
+  	$('#nextButton').hide()
+    break
+  case "Mathematical Computing":
+  	$('#computing').removeClass('hidden')
+  	$('#nextButton').hide()
+    break
+  case "Pure Mathematics":
+  	$('#pure').removeClass('hidden')
+  	$('#nextButton').hide()
+    break
+  case "Statistics":
+  	$('#stats').removeClass('hidden')
+  	$('#nextButton').hide()
+    break
+  case "Teaching":
+  	$('#teaching').removeClass('hidden')
+  	$('#nextButton').hide()
+    break
+  case "Design Your Own":
+  	$('#individual').removeClass('hidden')
+    break
+  default:
+    alert("An error has occured!")
+    break
+  }
+}
 
 $(document).ready(main);
