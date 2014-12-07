@@ -8,20 +8,26 @@ main = function() {
 	$('#nextButton').click(function() {
 		if ($('#chooseConcentration').hasClass('currentDiv')) {
 			concentration = $('#concentrationDropdown option:selected').text();
-			console.log(concentration);
 			removeCurrentDiv('#chooseConcentration');
 			makeCurrentDiv('#chooseClasses');
 			$('#backButton').show();
 		}
 		else if ($('#chooseClasses').hasClass('currentDiv')) {
-			coursesTaken = getCoursesTaken();
 			if (concentration === "Undecided") {
 				removeCurrentDiv('#chooseClasses');
 				makeCurrentDiv('#undecidedResultPage');
-				makeCurrentDiv('#coursesTaken');
 				$('#nextButton').hide();
 				$('#savePDFButton').show();
 			}
+			var courseList = $('ul.courses');
+			courseList.empty();
+			$.each(coursesTaken, function(i) {
+				console.log('populating list with \'' + coursesTaken[i] + '\'')
+				var li = $('<li>' + coursesTaken[i] + '</li>')
+					.addClass('list-group-item')
+				courseList.append(li);
+			});
+			makeCurrentDiv('#coursesTaken');
 		}
 	});
 
@@ -57,10 +63,6 @@ main = function() {
 			}
 		}
 	});
-}
-
-getCoursesTaken = function() {
-
 }
 
 setupInitialVisibility = function() {
