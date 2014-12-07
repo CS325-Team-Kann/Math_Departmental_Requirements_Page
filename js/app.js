@@ -31,7 +31,7 @@ main = function() {
 		}
 	});
 
-	$('#backButton').click(function() {
+	$('#backButton, #editCoursesButton').click(function() {
 		if($('#chooseClasses').hasClass('currentDiv')) {
 			removeCurrentDiv('#chooseClasses');
 			makeCurrentDiv('#chooseConcentration');
