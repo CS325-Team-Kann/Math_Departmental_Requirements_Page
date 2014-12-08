@@ -182,7 +182,43 @@
         <div id='individual'>
           <h3>Individually Designed Concentration</h3>
           <p><a href='https://www.math.umass.edu/sites/www.math.umass.edu/files/file-attachments/individual.pdf'>Individual Checklist</a></p>
-          <p>Individually designed concentration permits students, in consultation with their academic advisor, to design their own concentration so as to explore thoroughly a theme in mathematics or statistics or to investigate connections between mathematics and/or statistics and another field, such as biology or economics. An individual concentration must include eight courses numbered 400 or above, of at least three credits each. At least four of these eight courses must be in mathematics or statistics. In consultation with their academic advisor, students propose a plan for the eight courses to be used to fulfill the requirements of the individual concentration. No later than the end of the semester in which students are taking <span class="smcaps">Math</span> 300 or during the second semester of the students' sophomore year, whichever comes first, students will: prepare the plan in writing, secure approval of the plan by their advisor, and submit the written plan for approval to the Chief Undergraduate Advisor. No later than the end of the junior year, students review the plan with their academic advisor. If any changes are proposed to the original plan, students must again secure approval of the revised plan in writing.</p>
+          <p>Individually designed concentration permits students, in consultation with their academic advisor, to design their own concentration so as to explore thoroughly a theme in mathematics or statistics or to investigate connections between mathematics and/or statistics and another field, such as biology or economics. An individual concentration must include eight courses numbered 400 or above, of at least three credits each. At least four of these eight courses must be in mathematics or statistics. In consultation with their academic advisor, students propose a plan for the eight courses to be used to fulfill the requirements of the individual concentration. No later than the end of the semester in which students are taking <span class="smcaps">Math</span> 300 or during the second semester of the students' sophomore year, whichever comes first, students will: prepare the plan in writing, secure approval of the plan by their advisor, and submit the written plan for approval to the Chief Undergraduate Advisor. No later than the end of the junior year, students review the plan with their academic advisor. If any changes are proposed to the original plan, students must again secure approval of the revised plan in writing.</p> 
+          <h3>
+          Course List
+          </h3>
+          <div label='filter'>
+            <form>
+              <input type="checkbox" /><label>Show courses <select id="levelDropdown">
+            <option>Above</option>
+            <option>Below</option>
+          </select>
+          level 
+          <select id="courseidDropdown">
+            <option>100</option>
+            <option>200</option>
+            <option>300</option>
+            <option>400</option>
+          </select>
+          .</label>
+          <br />
+          <input type="checkbox" /> <label>Hide classes I don't meet the pre-requisites for.</label>
+            </form>
+          </div>
+          <div id='bintle'>
+            <h4>Math Courses >= 100</h4> 
+            <form class="classList">
+            <input type="checkbox" /><label>MATH 131</label><br />
+            <input type="checkbox" /><label>MATH 132</label><br />
+            <input type="checkbox" /><label>MATH 233</label><br />
+            <input type="checkbox" /><label>MATH 235</label><br />
+            <input type="checkbox" /><label>MATH 300</label><br />
+            <input type="checkbox" /><label>MATH 400</label><br />
+          </form>
+          <div id="buttonsSection" style="text-align:center">
+          <button id="viewButton" class="btn btn-primary" type="button">View Cart</button>
+          <button id="addButton" class="btn btn-success" onClick='confirm("Oops! You do not currently meet the prerequisites for that course\n\nWould you like to add it to your shopping cart anyway?")' type="button">Add to Cart</button>
+        </div>
+          </div>
         </div>
         <div id='computing'>
           <h3>Mathematical Computing Concentration</h3>
