@@ -6,16 +6,22 @@ main = function() {
 	var coursesTaken = [];
 
 	$('#nextButton').click(function() {
-		if ($('#chooseConcentration').hasClass('currentDiv')) {
+		if ($('#chooseConcentration').is(':visible')) {
 			concentration = $('#concentrationDropdown option:selected').text();
-			removeCurrentDiv('#chooseConcentration');
-			makeCurrentDiv('#chooseClasses');
+			console.log("user selected concentration: " + concentration)
+			//removeCurrentDiv('#chooseConcentration');
+			$('#chooseConcentration').hide();
+			//makeCurrentDiv('#chooseClasses');
+			$('#chooseClasses').show();
 			$('#backButton').show();
 		}
-		else if ($('#chooseClasses').hasClass('currentDiv')) {
-			removeCurrentDiv('#chooseClasses');
+		else if ($('#chooseClasses').is(':visible')) {
+			//removeCurrentDiv('#chooseClasses');
+			$('#chooseClasses').hide();
+			$('#requirements').show()
 			showConcentration(concentration)
 			$('#savePDFButton').show();
+			$('#nextButton').hide()
 			var courseList = $('ul.courses');
 			courseList.empty();
 			$.each(coursesTaken, function(i) {
@@ -24,22 +30,24 @@ main = function() {
 					.addClass('list-group-item')
 				courseList.append(li);
 			});
-			makeCurrentDiv('#coursesTaken');
+			$('#coursesTaken').show();
 		}
+
 	});
 
 	$('#backButton, #editCoursesButton').click(function() {
-		if($('#chooseClasses').hasClass('currentDiv')) {
-			removeCurrentDiv('#chooseClasses');
-			makeCurrentDiv('#chooseConcentration');
-			$('#backButton').hide();
+		if($('#chooseClasses').is(':visible')) {
+			$('#chooseClasses').hide()
+			$('#chooseConcentration').show()
+			$('#backButton').hide()
 		}
-		else if ($('#undecidedResultPage').hasClass('currentDiv')) {
-			removeCurrentDiv('#undecidedResultPage');
-			removeCurrentDiv('#coursesTaken');
-			makeCurrentDiv('#chooseClasses');
-			$('#nextButton').show();
-			$('#savePDFButton').hide();
+		else if ($('#requirements').is(':visible')) {
+			$('#requirements').children().hide();
+			$('#requirements').hide()
+			$('#coursesTaken').hide()
+			$('#chooseClasses').show()
+			$('#nextButton').show()
+			$('#savePDFButton').hide()
 		}
 	});
 
@@ -63,19 +71,33 @@ main = function() {
 }
 
 setupInitialVisibility = function() {
-	$('#chooseConcentration').addClass('currentDiv');
-	$('#chooseClasses').addClass('hidden');
-	$('#undecidedResultPage').addClass('hidden');
-	$('#actuarial').addClass('hidden');
+	/*$('#chooseConcentration').addClass('currentDiv')
+	$('#chooseClasses').addClass('hidden')
+	$('#general').addClass('hidden')
+	$('#actuarial').addClass('hidden')
 	$('#individual').addClass('hidden')
 	$('#computing').addClass('hidden')
 	$('#pure').addClass('hidden')
 	$('#teaching').addClass('hidden')
 	$('#stats').addClass('hidden')
 	$('#applied').addClass('hidden')
-	$('#coursesTaken').addClass('hidden');
-	$('#backButton').hide();
-	$('#savePDFButton').hide();
+	$('#coursesTaken').addClass('hidden')
+	$('#backButton').hide()
+	$('#savePDFButton').hide()*/
+
+	//$('#chooseConcentration').show()
+	$('#chooseClasses').hide()
+	$('#general').hide()
+	$('#actuarial').hide()
+	$('#individual').hide()
+	$('#computing').hide()
+	$('#pure').hide()
+	$('#teaching').hide()
+	$('#stats').hide()
+	$('#applied').hide()
+	$('#coursesTaken').hide()
+	$('#backButton').hide()
+	$('#savePDFButton').hide()
 }
 
 makeCurrentDiv = function(selector) {
@@ -91,41 +113,37 @@ removeCurrentDiv = function(selector) {
 showConcentration = function(concentration){
   switch (concentration){
   case "Undecided":
-  	$('#actuarial').removeClass('hidden')
-		$('#individual').removeClass('hidden')
-		$('#computing').removeClass('hidden')
-		$('#pure').removeClass('hidden')
-		$('#teaching').removeClass('hidden')
-		$('#stats').removeClass('hidden')
-		$('#applied').removeClass('hidden')
-  	$('#nextButton').hide()
+  	$('#actuarial').show();
+		//$('#individual').removeClass('hidden')
+		$('#general').show();
+		$('#computing').show();
+		$('#pure').show();
+		$('#teaching').show();
+		$('#stats').show();
+		$('#applied').show();
     break
   case "Actuarial":
-  	$('#actuarial').removeClass('hidden')
-  	$('#nextButton').hide()
+  	$('#actuarial').show();
     break
   case "Applied Mathematics":
-  	$('#applied').removeClass('hidden')
-  	$('#nextButton').hide()
+  	$('#applied').show();
     break
   case "Mathematical Computing":
-  	$('#computing').removeClass('hidden')
-  	$('#nextButton').hide()
+  	$('#computing').show();
     break
   case "Pure Mathematics":
-  	$('#pure').removeClass('hidden')
-  	$('#nextButton').hide()
+  	$('#pure').show();
     break
   case "Statistics":
-  	$('#stats').removeClass('hidden')
-  	$('#nextButton').hide()
+  	$('#stats').show();
     break
   case "Teaching":
-  	$('#teaching').removeClass('hidden')
-  	$('#nextButton').hide()
+  	$('#teaching').show();
     break
   case "Design Your Own":
-  	$('#individual').removeClass('hidden')
+  	$('#individual').show();
+  	$('#general').show();
+
     break
   default:
     alert("An error has occured!")
