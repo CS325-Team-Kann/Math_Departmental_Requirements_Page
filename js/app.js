@@ -79,6 +79,7 @@ main = function() {
   		if($(this).is(':checked')) {
   			coursesTaken = []
   			$(this).siblings().attr('checked', false);
+  			$()
   		}
   	}
   	// if a normal class is pressed
@@ -116,7 +117,7 @@ function filterLevels(checkbox){
   }
   else {
     $('.coursesSpan').each(function(){
-      $('#currLevel').text("Math Courses > 100")
+      $('#currLevel').text("All Courses")
       levelFilterEnabled = false
       $(this).show();
     })
