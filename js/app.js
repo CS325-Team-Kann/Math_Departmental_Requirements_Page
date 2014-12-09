@@ -74,7 +74,10 @@ $('.classList input:checkbox').change(function() {
 	var className = $(this).next('label').text();
 	// if no prequisites is pressed
 	if (className === "No prerequisites.") {
-
+		if($(this).is(':checked')) {
+			coursesTaken = []
+			$(this).siblings().attr('checked', false);
+		}
 	}
 	// if a normal class is pressed
 	else {
