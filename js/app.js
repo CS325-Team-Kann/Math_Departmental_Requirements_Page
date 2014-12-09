@@ -21,14 +21,19 @@ main = function() {
 			$('#chooseClasses').hide();
 			$('#requirements').show()
 			showConcentration(concentration)
-			$('#savePDFButton').show();
+			
+			// BUTTONS
 			$('#nextButton').hide()
+			$('#backButton').hide();
+			$('#changeConcentration').show();
+			$('#savePDFButton').show();
+			
 			var courseList = $('ul.courses');
 			courseList.empty();
 			$.each(coursesTaken, function(i) {
 				console.log('populating list with \'' + coursesTaken[i] + '\'')
 				var li = $('<li>' + coursesTaken[i] + '</li>')
-					.addClass('list-group-item')
+				.addClass('list-group-item')
 				courseList.append(li);
 			});
 			$('#coursesTaken').show();
@@ -36,29 +41,47 @@ main = function() {
 
 	});
 
-	$('#backButton, #editCoursesButton').click(function() {
-		if($('#chooseClasses').is(':visible')) {
-			$('#chooseClasses').hide()
-			$('#chooseConcentration').show()
-			$('#backButton').hide()
-		}
-		else if ($('#requirements').is(':visible')) {
-			$('#requirements').children().hide();
-			$('#requirements').hide()
-			$('#coursesTaken').hide()
-			$('#chooseClasses').show()
-			$('#nextButton').show()
-			$('#savePDFButton').hide()
-		}
-	});
+$('#backButton, #editCoursesButton').click(function() {
+	if($('#chooseClasses').is(':visible')) {
+		$('#chooseClasses').hide()
+		$('#chooseConcentration').show()
+		$('#backButton').hide()
+	}
+});
 
-	$("#savePDFButton").click(function() {
+$('#editCoursesButton').click(function() {
+	if ($('#requirements').is(':visible')) {
+		hideRequirementsPage()
+		$('#chooseClasses').show()
+		$('#backButton').show()
+		$('#nextButton').show()
+	}
+})
+
+$('#changeConcentration').click(function() {
+	if ($('#requirements').is(':visible')) {
+		hideRequirementsPage()
+		$('#chooseConcentration').show()
+		$('#nextButton').show()
+	}
+})
+
+$("#savePDFButton").click(function() {
    		// // hope the server sets Content-Disposition: attachment!
-    	window.open('../download/requirements.pdf','_blank');
-	});
+   		window.open('../download/requirements.pdf','_blank');
+   	});
 
-	$('.classList input:checkbox').change(function() {
-		var className = $(this).next('label').text();
+$('.classList input:checkbox').change(function() {
+	var className = $(this).next('label').text();
+	// if no prequisites is pressed
+	if (className === "No prerequisites.") {
+		if($(this).is(':checked')) {
+			coursesTaken = []
+			$(this).siblings().attr('checked', false);
+		}
+	}
+	// if a normal class is pressed
+	else {
 		if($(this).is(':checked')) {
 			coursesTaken.push(className);
 		}
@@ -69,27 +92,6 @@ main = function() {
 			}
 		}
 	});
-
-  // $('#filter input:checkbox').change(function() {
-  //   var comparator = $('#comparator').val()
-  //   var courseID = $('#courseID').val()
-  //   debugger
-  //   $('#courseID').text().split(" ")[1]
-  //   if($(this).is(':checked')) {
-  //     if (comparator == 'Above'){
-  //       $('#coursesSpan').each(function(){
-  //         if (courseID < $(this).text().split(" ")[1]){
-  //           $(this).hide()
-  //         }
-  //       })
-        
-  //     }
-  //   }
-  //   else {
-  //   }
-  // })
-
-
 }
 
 function filterLevels(checkbox){
@@ -148,11 +150,20 @@ setupInitialVisibility = function() {
 	$('#coursesTaken').hide()
 	$('#backButton').hide()
 	$('#savePDFButton').hide()
+	$('#changeConcentration').hide()
+}
+
+hideRequirementsPage = function() {
+	$('#requirements').children().hide();
+	$('#requirements').hide()
+	$('#coursesTaken').hide()
+	$('#changeConcentration').hide()
+	$('#savePDFButton').hide()
 }
 
 makeCurrentDiv = function(selector) {
-	$(selector).addClass('currentDiv');
-	$(selector).removeClass('hidden');
+	$(selector).addClass('currentDiv')
+	$(selector).removeClass('hidden')
 }
 
 removeCurrentDiv = function(selector) {
@@ -161,9 +172,9 @@ removeCurrentDiv = function(selector) {
 }
 
 showConcentration = function(concentration){
-  switch (concentration){
-  case "Undecided":
-  	$('#actuarial').show();
+	switch (concentration){
+		case "Undecided":
+		$('#actuarial').show();
 		//$('#individual').removeClass('hidden')
 		$('#general').show();
 		$('#computing').show();
@@ -171,34 +182,34 @@ showConcentration = function(concentration){
 		$('#teaching').show();
 		$('#stats').show();
 		$('#applied').show();
-    break
-  case "Actuarial":
-  	$('#actuarial').show();
-    break
-  case "Applied Mathematics":
-  	$('#applied').show();
-    break
-  case "Mathematical Computing":
-  	$('#computing').show();
-    break
-  case "Pure Mathematics":
-  	$('#pure').show();
-    break
-  case "Statistics":
-  	$('#stats').show();
-    break
-  case "Teaching":
-  	$('#teaching').show();
-    break
-  case "Design Your Own":
-  	$('#individual').show();
-  	$('#general').show();
+		break
+		case "Actuarial":
+		$('#actuarial').show();
+		break
+		case "Applied Mathematics":
+		$('#applied').show();
+		break
+		case "Mathematical Computing":
+		$('#computing').show();
+		break
+		case "Pure Mathematics":
+		$('#pure').show();
+		break
+		case "Statistics":
+		$('#stats').show();
+		break
+		case "Teaching":
+		$('#teaching').show();
+		break
+		case "Design Your Own":
+		$('#individual').show();
+		$('#general').show();
 
-    break
-  default:
-    alert("An error has occured!")
-    break
-  }
+		break
+		default:
+		alert("An error has occured!")
+		break
+	}
 }
 
 $(document).ready(main);
