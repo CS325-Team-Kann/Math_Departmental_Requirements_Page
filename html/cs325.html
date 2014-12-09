@@ -187,33 +187,37 @@
             <h3>
             Course List
             </h3>
-            <div label='filter'>
+            <div id='filters'>
               <form>
-                <input type="checkbox" /><label>Show courses <select id="levelDropdown">
-              <option>Above</option>
-              <option>Below</option>
-            </select>
-            level 
-            <select id="courseidDropdown">
-              <option>100</option>
-              <option>200</option>
-              <option>300</option>
-              <option>400</option>
-            </select>
-            .</label>
-            <br />
-            <input type="checkbox" /> <label>Hide classes I don't meet the pre-requisites for.</label>
+                <input type="checkbox" id='filter' onclick="filterLevels(this)" /><label> Show courses
+                  <select id="comparator">
+                    <option>Above</option>
+                    <option>Below</option>
+                  </select>
+                  level
+                <select id="level">
+                  <option>100</option>
+                  <option>200</option>
+                  <option>300</option>
+                  <option>400</option>
+                </select>
+              </label>
+              <br />
+              <input type="checkbox" /> <label>Hide classes I don't meet the pre-requisites for.</label>
               </form>
             </div>
-            <div id='bintle'>
-              <h4>Math Courses >= 100</h4> 
+
+            <div id='courseList'>
+              <h4 id='currLevel'>
+                Math Courses > 100
+              </h4> 
               <form class="classList">
-              <input type="checkbox" /><label>MATH 131</label><br />
-              <input type="checkbox" /><label>MATH 132</label><br />
-              <input type="checkbox" /><label>MATH 233</label><br />
-              <input type="checkbox" /><label>MATH 235</label><br />
-              <input type="checkbox" /><label>MATH 300</label><br />
-              <input type="checkbox" /><label>MATH 400</label><br />
+              <span class='coursesSpan' id='math131' val='123'><input type="checkbox" /><label>MATH 131</label><br /></span>
+              <span class='coursesSpan' id='math132'><input type="checkbox" /><label>MATH 132</label><br /></span>
+              <span class='coursesSpan' id='math233'><input type="checkbox" /><label>MATH 233</label><br /></span>
+              <span class='coursesSpan' id='math235'><input type="checkbox" /><label>MATH 235</label><br /></span>
+              <span class='coursesSpan' id='math300'><input type="checkbox" /><label>MATH 300</label><br /></span>
+              <span class='coursesSpan' id='math411'><input type="checkbox" /><label>MATH 411</label><br /></span>
             </form>
             <div id="buttonsSection" style="text-align:center">
             <button id="viewButton" class="btn btn-primary" type="button">View Cart</button>

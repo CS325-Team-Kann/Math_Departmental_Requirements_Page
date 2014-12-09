@@ -4,6 +4,7 @@ main = function() {
 
 	var concentration;
 	var coursesTaken = [];
+  var shoppingCart = []
 
 	$('#nextButton').click(function() {
 		if ($('#chooseConcentration').is(':visible')) {
@@ -68,6 +69,55 @@ main = function() {
 			}
 		}
 	});
+
+  // $('#filter input:checkbox').change(function() {
+  //   var comparator = $('#comparator').val()
+  //   var courseID = $('#courseID').val()
+  //   debugger
+  //   $('#courseID').text().split(" ")[1]
+  //   if($(this).is(':checked')) {
+  //     if (comparator == 'Above'){
+  //       $('#coursesSpan').each(function(){
+  //         if (courseID < $(this).text().split(" ")[1]){
+  //           $(this).hide()
+  //         }
+  //       })
+        
+  //     }
+  //   }
+  //   else {
+  //   }
+  // })
+
+
+}
+
+function filterLevels(checkbox){
+  var comparator = $('#comparator').val()
+  var level = $('#level').val()
+  if(checkbox.checked) {
+    if (comparator == 'Above'){
+      $('#currLevel').text("Math Courses > " + level)
+      $('.coursesSpan').each(function(){
+        if (level >= $(this).text().split(" ")[1]){
+          $(this).hide()
+        }
+      })
+    }
+    else if (comparator == 'Below'){
+      $('.coursesSpan').each(function(){
+        $('#currLevel').text("Math Courses < " + level)
+        if (level <= $(this).text().split(" ")[1]){
+          $(this).hide()
+        }
+      })
+    }
+  }
+  else {
+    $('.coursesSpan').each(function(){
+      $(this).show();
+    })
+  }
 }
 
 setupInitialVisibility = function() {
