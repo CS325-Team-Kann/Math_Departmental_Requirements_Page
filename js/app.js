@@ -1,3 +1,4 @@
+var levelFilterEnabled = false
 main = function() {
 	
 	setupInitialVisibility();
@@ -41,68 +42,99 @@ main = function() {
 
 	});
 
-$('#backButton, #editCoursesButton').click(function() {
-	if($('#chooseClasses').is(':visible')) {
-		$('#chooseClasses').hide()
-		$('#chooseConcentration').show()
-		$('#backButton').hide()
-	}
-});
+  $('#backButton, #editCoursesButton').click(function() {
+  	if($('#chooseClasses').is(':visible')) {
+  		$('#chooseClasses').hide()
+  		$('#chooseConcentration').show()
+  		$('#backButton').hide()
+  	}
+  });
 
-$('#editCoursesButton').click(function() {
-	if ($('#requirements').is(':visible')) {
-		hideRequirementsPage()
-		$('#chooseClasses').show()
-		$('#backButton').show()
-		$('#nextButton').show()
-	}
-})
+  $('#editCoursesButton').click(function() {
+  	if ($('#requirements').is(':visible')) {
+  		hideRequirementsPage()
+  		$('#chooseClasses').show()
+  		$('#backButton').show()
+  		$('#nextButton').show()
+  	}
+  })
 
-$('#changeConcentration').click(function() {
-	if ($('#requirements').is(':visible')) {
-		hideRequirementsPage()
-		$('#chooseConcentration').show()
-		$('#nextButton').show()
-	}
-})
+  $('#changeConcentration').click(function() {
+  	if ($('#requirements').is(':visible')) {
+  		hideRequirementsPage()
+  		$('#chooseConcentration').show()
+  		$('#nextButton').show()
+  	}
+  })
 
-$("#savePDFButton").click(function() {
-   		// // hope the server sets Content-Disposition: attachment!
-   		window.open('../download/requirements.pdf','_blank');
-   	});
+  $("#savePDFButton").click(function() {
+     		// // hope the server sets Content-Disposition: attachment!
+     		window.open('../download/requirements.pdf','_blank');
+     	});
 
-$('.classList input:checkbox').change(function() {
-	var className = $(this).next('label').text();
-	// if no prequisites is pressed
-	if (className === "No prerequisites.") {
-		if($(this).is(':checked')) {
-			coursesTaken = []
-			$(this).siblings().attr('checked', false);
-		}
-	}
-	// if a normal class is pressed
-	else {
-		if($(this).is(':checked')) {
-			coursesTaken.push(className);
-		}
-		else {
-			var index = coursesTaken.indexOf(className);
-			if (index > -1) {
-				coursesTaken.splice(index, 1)
-			}
-		}
-	});
+  $('.classList input:checkbox').change(function() {
+  	var className = $(this).next('label').text();
+  	// if no prequisites is pressed
+  	if (className === "No prerequisites.") {
+  		if($(this).is(':checked')) {
+  			coursesTaken = []
+  			$(this).siblings().attr('checked', false);
+  		}
+  	}
+  	// if a normal class is pressed
+  	else {
+  		if($(this).is(':checked')) {
+  			coursesTaken.push(className);
+  		}
+  		else {
+  			var index = coursesTaken.indexOf(className);
+  			if (index > -1) {
+  				coursesTaken.splice(index, 1)
+  			}
+  		}
+  	}
+  })
+
+  $('#comparator').change(function(){
+    if (levelFilterEnabled){
+      setFilters()
+    }
+  })
+
+  $('#level').change(function(){
+    if (levelFilterEnabled)
+      setFilters()
+  })
 }
 
 function filterLevels(checkbox){
   var comparator = $('#comparator').val()
   var level = $('#level').val()
   if(checkbox.checked) {
-    if (comparator == 'Above'){
+    setFilters()
+    levelFilterEnabled = true
+  }
+  else {
+    $('.coursesSpan').each(function(){
+      $('#currLevel').text("Math Courses > 100")
+      levelFilterEnabled = false
+      $(this).show();
+    })
+  }
+}
+
+setFilters = function() {
+  var comparator = $('#comparator').val()
+  var level = $('#level').val()
+  if (comparator == 'Above'){
       $('#currLevel').text("Math Courses > " + level)
       $('.coursesSpan').each(function(){
         if (level >= $(this).text().split(" ")[1]){
           $(this).hide()
+        }
+        else{
+          $(this).show()
+        
         }
       })
     }
@@ -112,16 +144,12 @@ function filterLevels(checkbox){
         if (level <= $(this).text().split(" ")[1]){
           $(this).hide()
         }
+        else{
+          $(this).show()
+        }
       })
     }
-  }
-  else {
-    $('.coursesSpan').each(function(){
-      $(this).show();
-    })
-  }
 }
-
 setupInitialVisibility = function() {
 	/*$('#chooseConcentration').addClass('currentDiv')
 	$('#chooseClasses').addClass('hidden')
