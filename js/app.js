@@ -7,6 +7,7 @@ main = function() {
 	var coursesTaken = [];
   var shoppingCart = []
 
+  	
 	$('#nextButton').click(function() {
 		if ($('#chooseConcentration').is(':visible')) {
 			concentration = $('#concentrationDropdown option:selected').text();
@@ -152,21 +153,6 @@ setFilters = function() {
     }
 }
 setupInitialVisibility = function() {
-	/*$('#chooseConcentration').addClass('currentDiv')
-	$('#chooseClasses').addClass('hidden')
-	$('#general').addClass('hidden')
-	$('#actuarial').addClass('hidden')
-	$('#individual').addClass('hidden')
-	$('#computing').addClass('hidden')
-	$('#pure').addClass('hidden')
-	$('#teaching').addClass('hidden')
-	$('#stats').addClass('hidden')
-	$('#applied').addClass('hidden')
-	$('#coursesTaken').addClass('hidden')
-	$('#backButton').hide()
-	$('#savePDFButton').hide()*/
-
-	//$('#chooseConcentration').show()
 	$('#chooseClasses').hide()
 	$('#general').hide()
 	$('#actuarial').hide()
@@ -204,7 +190,6 @@ showConcentration = function(concentration){
 	switch (concentration){
 		case "Undecided":
 		$('#actuarial').show();
-		//$('#individual').removeClass('hidden')
 		$('#general').show();
 		$('#computing').show();
 		$('#pure').show();
@@ -233,7 +218,6 @@ showConcentration = function(concentration){
 		case "Design Your Own":
 		$('#individual').show();
 		$('#general').show();
-
 		break
 		default:
 		alert("An error has occured!")
