@@ -1,25 +1,21 @@
 var levelFilterEnabled = false
+var coursesTaken = [];
+var shoppingCart = []
 main = function() {
 	
 	setupInitialVisibility();
 
 	var concentration;
-	var coursesTaken = [];
-  var shoppingCart = []
-
   	
 	$('#nextButton').click(function() {
 		if ($('#chooseConcentration').is(':visible')) {
 			concentration = $('#concentrationDropdown option:selected').text();
 			console.log("user selected concentration: " + concentration)
-			//removeCurrentDiv('#chooseConcentration');
 			$('#chooseConcentration').hide();
-			//makeCurrentDiv('#chooseClasses');
 			$('#chooseClasses').show();
 			$('#backButton').show();
 		}
 		else if ($('#chooseClasses').is(':visible')) {
-			//removeCurrentDiv('#chooseClasses');
 			$('#chooseClasses').hide();
 			$('#requirements').show()
 			showConcentration(concentration)
@@ -32,6 +28,7 @@ main = function() {
 			
 			var courseList = $('ul.courses');
 			courseList.empty();
+      coursesTaken.sort()
 			$.each(coursesTaken, function(i) {
 				console.log('populating list with \'' + coursesTaken[i] + '\'')
 				var li = $('<li>' + coursesTaken[i] + '</li>')
@@ -43,7 +40,7 @@ main = function() {
 
 	});
 
-  $('#backButton, #editCoursesButton').click(function() {
+  $('#backButton').click(function() {
   	if($('#chooseClasses').is(':visible')) {
   		$('#chooseClasses').hide()
   		$('#chooseConcentration').show()
@@ -52,6 +49,9 @@ main = function() {
   });
 
   $('#editCoursesButton').click(function() {
+    $('#filter').prop('checked', false)
+    prereqs($('#filter'))
+    $('#prereqFilter').prop('checked', false)
   	if ($('#requirements').is(':visible')) {
   		hideRequirementsPage()
   		$('#chooseClasses').show()
@@ -97,10 +97,36 @@ main = function() {
   	}
   })
 
+  $('#allClasses input:checkbox').change(function() {
+    var className = $(this).next('label').text();
+    var id = className.split(" ")[1]
+    // if a normal class is pressed
+    if($(this).is(':checked')) {
+      if(!hasPrereqs(coursesTaken, className)){
+        $(this).parent().addClass('noPrereq')
+        alert("You currently do not have the prequisites for this class. Please assure this is correct before continuing.")
+      }
+      shoppingCart.push(className)
+      $('#shoppingCart').append("<div id=" + id + " ><label>" + className + "</label><br></div")
+    }
+    else {
+      var index = shoppingCart.indexOf(className)
+      if (index > -1) {
+        $(this).parent().removeClass('noPrereq')
+        shoppingCart.splice(index, 1)
+        $('#'+id).remove()
+      }
+    }
+  })
+
   $('#comparator').change(function(){
     if (levelFilterEnabled){
       setFilters()
     }
+  })
+
+  $('#prereqFilter').change(function(){
+    prereqs($(this))
   })
 
   $('#level').change(function(){
@@ -109,9 +135,28 @@ main = function() {
   })
 }
 
+// If the class you want has a higher number than what you've taken,
+// you don't have the prereq
+function hasPrereqs(coursesTaken, course){
+  if (coursesTaken.length == 0)
+    return false
+  var taken = parseInt(coursesTaken[coursesTaken.length-1].split(" ")[1].substring(0,1))
+  var want = parseInt(course.split(" ")[1].substring(0,1))
+  return ((taken + 1) >= want)
+}
+
+function prereqs(checkbox){
+  if(checkbox.checked) {
+    hidePrereqs()
+  }
+  else{
+    $('#allClasses span').each(function(i){
+      $(this).show()
+    })
+  }
+}
+
 function filterLevels(checkbox){
-  var comparator = $('#comparator').val()
-  var level = $('#level').val()
   if(checkbox.checked) {
     setFilters()
     levelFilterEnabled = true
@@ -121,6 +166,19 @@ function filterLevels(checkbox){
       $('#currLevel').text("All Courses")
       levelFilterEnabled = false
       $(this).show();
+    })
+  }
+}
+
+hidePrereqs = function() {
+  if(coursesTaken.length > 0){
+    var c
+    var highest = coursesTaken[coursesTaken.length-1].split(" ")[1].substring(0,1)
+    highest = parseInt(highest)
+    $('#allClasses span').each(function(i){
+      c = parseInt($(this).text().split(" ")[1].substring(0,1))
+      if (highest + 1 < c)
+        $(this).hide()
     })
   }
 }
@@ -152,6 +210,7 @@ setFilters = function() {
       })
     }
 }
+
 setupInitialVisibility = function() {
 	$('#chooseClasses').hide()
 	$('#general').hide()
@@ -174,16 +233,6 @@ hideRequirementsPage = function() {
 	$('#coursesTaken').hide()
 	$('#changeConcentration').hide()
 	$('#savePDFButton').hide()
-}
-
-makeCurrentDiv = function(selector) {
-	$(selector).addClass('currentDiv')
-	$(selector).removeClass('hidden')
-}
-
-removeCurrentDiv = function(selector) {
-	$(selector).removeClass('currentDiv');
-	$(selector).addClass('hidden');
 }
 
 showConcentration = function(concentration){
