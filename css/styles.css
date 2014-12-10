@@ -46,8 +46,6 @@
 
 #cart {
 	float:right;
-	vertical-align: top;
-	display: inline-block;
 	margin-right: 100px;
 }
 
@@ -59,22 +57,24 @@
 	min-height: 100px;
 	min-width: 300px;
 	display:inline-block;
- 	height:150px;
+ 	height:175px;
  	overflow-y:scroll; 
   padding:10px;
 }
 
+#courseList {
+	float: left;
+}
+
 
 #allClasses { 
-	float: left;
 	border:2px solid #ccc;
 	text-align:left;
 	margin-left:auto;
 	margin-right:auto;
 	min-height: 100px;
 	min-width: 300px;
-	display:inline-block;
- 	height:150px;
+ 	height:175px;
  	overflow-y:scroll; 
   padding:10px;
 }
