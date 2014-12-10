@@ -108,6 +108,9 @@ main = function() {
       }
       shoppingCart.push(className)
       $('#shoppingCart').append("<div id=" + id + " ><label>" + className + "</label><br></div")
+      if(!hasPrereqs(coursesTaken, className)){
+        $('#'+id).addClass('noPrereq')
+      }
     }
     else {
       var index = shoppingCart.indexOf(className)
