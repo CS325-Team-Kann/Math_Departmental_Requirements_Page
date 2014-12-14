@@ -223,6 +223,7 @@ setupInitialVisibility = function() {
 	$('#stats').hide()
 	$('#applied').hide()
 	$('#coursesTaken').hide()
+  coursesTaken.push("No courses taken yet.")
 	$('#backButton').hide()
 	$('#savePDFButton').hide()
 	$('#changeConcentration').hide()
