@@ -75,26 +75,24 @@ main = function() {
 
   $('.classList input:checkbox').change(function() {
   	var className = $(this).next('label').text();
-  	// if no prequisites is pressed
-  	if (className === "No prerequisites.") {
-  		if($(this).is(':checked')) {
-  			coursesTaken = []
-  			$(this).siblings().attr('checked', false);
-  			$()
-  		}
-  	}
-  	// if a normal class is pressed
-  	else {
-  		if($(this).is(':checked')) {
-  			coursesTaken.push(className);
-  		}
-  		else {
-  			var index = coursesTaken.indexOf(className);
-  			if (index > -1) {
-  				coursesTaken.splice(index, 1)
-  			}
-  		}
-  	}
+    if($(this).is(':checked')) {
+      coursesTaken.push(className);
+    } else {
+      var index = coursesTaken.indexOf(className);
+      if (index > -1) {
+        coursesTaken.splice(index, 1)
+      }
+    }
+    if (coursesTaken.length == 0) {
+      console.log("empty course taken list!")
+      coursesTaken.push("No courses taken yet.")
+    } else {
+      var index = coursesTaken.indexOf("No courses taken yet.")
+      if (index > -1) {
+        console.log("index of no courses: " + index)
+        coursesTaken.splice(index, 1)
+      }
+    }
   })
 
   $('#allClasses input:checkbox').change(function() {
