@@ -9,6 +9,7 @@ main = function() {
   	
 	$('#nextButton').click(function() {
 		if ($('#chooseConcentration').is(':visible')) {
+      goToCoursesPage($('#concPage'))
 			concentration = $('#concentrationDropdown option:selected').text();
 			console.log("user selected concentration: " + concentration)
 			$('#chooseConcentration').hide();
@@ -16,6 +17,7 @@ main = function() {
 			$('#backButton').show();
 		}
 		else if ($('#chooseClasses').is(':visible')) {
+      goToReviewPage($('#crsPage'))
 			$('#chooseClasses').hide();
 			$('#requirements').show()
 			showConcentration(concentration)
@@ -24,7 +26,7 @@ main = function() {
 			$('#nextButton').hide()
 			$('#backButton').hide();
 			$('#changeConcentration').show();
-			$('#savePDFButton').show();
+			$('.savePDFButton').show();
 			
 			var courseList = $('ul.courses');
 			courseList.empty();
@@ -42,6 +44,7 @@ main = function() {
 
   $('#backButton').click(function() {
   	if($('#chooseClasses').is(':visible')) {
+      goToConcentrationPage($('#crsPage'))
   		$('#chooseClasses').hide()
   		$('#chooseConcentration').show()
   		$('#backButton').hide()
@@ -49,6 +52,7 @@ main = function() {
   });
 
   $('#editCoursesButton').click(function() {
+    goToCoursesPage($('#revPage'))
     $('#filter').prop('checked', false)
     prereqs($('#filter'))
     $('#prereqFilter').prop('checked', false)
@@ -61,6 +65,7 @@ main = function() {
   })
 
   $('#changeConcentration').click(function() {
+    goToConcentrationPage($('#revPage'))
   	if ($('#requirements').is(':visible')) {
   		hideRequirementsPage()
   		$('#chooseConcentration').show()
@@ -68,7 +73,7 @@ main = function() {
   	}
   })
 
-  $("#savePDFButton").click(function() {
+  $(".savePDFButton").click(function() {
      		// // hope the server sets Content-Disposition: attachment!
      		window.open('../download/requirements.pdf','_blank');
      	});
@@ -134,6 +139,27 @@ main = function() {
     if (levelFilterEnabled)
       setFilters()
   })
+}
+
+function goToConcentrationPage(selector) {
+  selector.removeClass('label-primary')
+  selector.addClass('label-default');
+  $('#concPage').removeClass('label-default')
+  $('#concPage').addClass('label-primary')
+}
+
+function goToCoursesPage(selector) {
+  selector.removeClass('label-primary')
+  selector.addClass('label-default');
+  $('#crsPage').removeClass('label-default')
+  $('#crsPage').addClass('label-primary')
+}
+
+function goToReviewPage(selector) {
+  selector.removeClass('label-primary')
+  selector.addClass('label-default');
+  $('#revPage').removeClass('label-default')
+  $('#revPage').addClass('label-primary')
 }
 
 // If the class you want has a higher number than what you've taken,
@@ -225,7 +251,7 @@ setupInitialVisibility = function() {
 	$('#coursesTaken').hide()
   coursesTaken.push("No courses taken yet.")
 	$('#backButton').hide()
-	$('#savePDFButton').hide()
+	$('.savePDFButton').hide()
 	$('#changeConcentration').hide()
 }
 
@@ -234,7 +260,7 @@ hideRequirementsPage = function() {
 	$('#requirements').hide()
 	$('#coursesTaken').hide()
 	$('#changeConcentration').hide()
-	$('#savePDFButton').hide()
+	$('.savePDFButton').hide()
 }
 
 showConcentration = function(concentration){

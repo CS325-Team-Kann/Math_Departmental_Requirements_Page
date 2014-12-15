@@ -49,6 +49,19 @@
 	margin-right: 100px;
 }
 
+#cart .savePDFButton {
+	margin: 0px;
+}
+
+#pageIndicator {
+	margin-top:10px;
+	margin-bottom:15px;
+}
+
+#pageIndicator h3{
+	display:inline;
+}
+
 #shoppingCart {
 	border:2px solid #ccc;
 	text-align:left;
@@ -65,7 +78,6 @@
 #courseList {
 	float: left;
 }
-
 
 #allClasses { 
 	border:2px solid #ccc;
